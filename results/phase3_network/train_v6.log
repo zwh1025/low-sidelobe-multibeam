@@ -1,0 +1,24 @@
+device=cuda | runs=main,b_pat,a_amp | smoke=False
+[main] epoch   0 loss 0.0429 (sll 0.0125 dir 0.0038 gain 0.0020 pat 0.3234 tau 0.010) val_sll -9.77 dB best -9.77 | 27.5s
+[main] epoch  10 loss 0.0377 (sll 0.0151 dir 0.0032 gain 0.0022 pat 0.3248 tau 0.010) val_sll -9.77 dB best -9.77 | 23.1s
+[main] epoch  20 loss 0.0394 (sll 0.0214 dir 0.0033 gain 0.0021 pat 0.3227 tau 0.010) val_sll -9.77 dB best -9.77 | 23.2s
+[main] epoch  30 loss 0.0422 (sll 0.0201 dir 0.0036 gain 0.0023 pat 0.3249 tau 0.009) val_sll -9.77 dB best -9.77 | 23.1s
+[main] epoch  40 loss 0.0465 (sll 0.0236 dir 0.0045 gain 0.0031 pat 0.3249 tau 0.009) val_sll -9.77 dB best -9.77 | 23.2s
+[main] epoch  46 loss 0.0496 (sll 0.0281 dir 0.0034 gain 0.0023 pat 0.3241 tau 0.008) val_sll -9.77 dB best -9.77 | 23.2s
+[main] early stop at epoch 46
+[main] done: best val SLL -9.77 dB, 1095 s
+[b_pat] epoch   0 loss 0.0267 (sll 0.0125 dir 0.0038 gain 0.0020 pat 0.0000 tau 0.010) val_sll -9.77 dB best -9.77 | 22.0s
+[b_pat] epoch  10 loss 0.0215 (sll 0.0151 dir 0.0032 gain 0.0022 pat 0.0000 tau 0.010) val_sll -9.77 dB best -9.77 | 22.0s
+[b_pat] epoch  20 loss 0.0232 (sll 0.0213 dir 0.0034 gain 0.0021 pat 0.0000 tau 0.010) val_sll -9.77 dB best -9.77 | 22.0s
+[b_pat] epoch  30 loss 0.0261 (sll 0.0201 dir 0.0037 gain 0.0023 pat 0.0000 tau 0.009) val_sll -9.77 dB best -9.77 | 21.9s
+[b_pat] epoch  40 loss 0.0303 (sll 0.0236 dir 0.0046 gain 0.0032 pat 0.0000 tau 0.009) val_sll -9.77 dB best -9.77 | 21.9s
+[b_pat] epoch  43 loss 0.0318 (sll 0.0288 dir 0.0030 gain 0.0020 pat 0.0000 tau 0.008) val_sll -9.77 dB best -9.77 | 22.0s
+[b_pat] early stop at epoch 43
+[b_pat] done: best val SLL -9.77 dB, 967 s
+[a_amp] epoch   0 loss 0.0434 (sll 0.0125 dir 0.0038 gain 0.0020 pat 0.3234 tau 0.010) val_sll -9.77 dB best -9.77 | 23.2s
+[a_amp] epoch  10 loss 0.0377 (sll 0.0151 dir 0.0032 gain 0.0022 pat 0.3248 tau 0.010) val_sll -9.77 dB best -9.77 | 23.1s
+[a_amp] epoch  20 loss 0.0394 (sll 0.0214 dir 0.0033 gain 0.0021 pat 0.3227 tau 0.010) val_sll -9.77 dB best -9.77 | 22.8s
+[a_amp] epoch  30 loss 0.0423 (sll 0.0201 dir 0.0037 gain 0.0023 pat 0.3247 tau 0.009) val_sll -9.77 dB best -9.77 | 22.8s
+[a_amp] epoch  40 loss 0.0465 (sll 0.0236 dir 0.0045 gain 0.0031 pat 0.3248 tau 0.009) val_sll -9.77 dB best -9.77 | 22.8s
+[a_amp] early stop at epoch 40
+[a_amp] done: best val SLL -9.77 dB, 942 s

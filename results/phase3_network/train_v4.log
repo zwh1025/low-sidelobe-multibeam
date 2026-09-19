@@ -1,0 +1,21 @@
+device=cuda | runs=main,b_pat,a_amp | smoke=False
+[main] epoch   0 loss 0.0282 (sll 0.0002 dir 0.0038 gain 0.0020 pat 0.3234 tau nan) val_sll -9.77 dB best -9.77 | 28.0s
+[main] epoch  10 loss 0.0222 (sll 0.0002 dir 0.0032 gain 0.0021 pat 0.3250 tau nan) val_sll -9.77 dB best -9.77 | 22.8s
+[main] epoch  20 loss 0.0223 (sll 0.0002 dir 0.0033 gain 0.0021 pat 0.3228 tau nan) val_sll -9.77 dB best -9.77 | 22.8s
+[main] epoch  30 loss 0.0222 (sll 0.0002 dir 0.0037 gain 0.0023 pat 0.3247 tau 0.100) val_sll -9.77 dB best -9.77 | 23.2s
+[main] early stop at epoch 30
+[main] done: best val SLL -9.77 dB, 717 s
+[b_pat] epoch   0 loss 0.0119 (sll 0.0002 dir 0.0038 gain 0.0020 pat 0.0000 tau nan) val_sll -9.77 dB best -9.77 | 21.6s
+[b_pat] epoch  10 loss 0.0061 (sll 0.0002 dir 0.0033 gain 0.0022 pat 0.0000 tau nan) val_sll -9.77 dB best -9.77 | 21.5s
+[b_pat] epoch  20 loss 0.0060 (sll 0.0002 dir 0.0033 gain 0.0021 pat 0.0000 tau nan) val_sll -9.77 dB best -9.77 | 21.5s
+[b_pat] epoch  30 loss 0.0061 (sll 0.0002 dir 0.0037 gain 0.0023 pat 0.0000 tau 0.100) val_sll -9.77 dB best -9.77 | 21.9s
+[b_pat] epoch  40 loss 0.0061 (sll 0.0003 dir 0.0045 gain 0.0031 pat 0.0000 tau 0.098) val_sll -9.77 dB best -9.77 | 21.9s
+[b_pat] epoch  48 loss 0.0061 (sll 0.0003 dir 0.0036 gain 0.0024 pat 0.0000 tau 0.094) val_sll -9.77 dB best -9.77 | 21.9s
+[b_pat] early stop at epoch 48
+[b_pat] done: best val SLL -9.77 dB, 1064 s
+[a_amp] epoch   0 loss 0.0281 (sll 0.0002 dir 0.0039 gain 0.0021 pat 0.3234 tau nan) val_sll -9.77 dB best -9.77 | 22.8s
+[a_amp] epoch  10 loss 0.0222 (sll 0.0002 dir 0.0032 gain 0.0021 pat 0.3248 tau nan) val_sll -9.77 dB best -9.77 | 22.7s
+[a_amp] epoch  20 loss 0.0222 (sll 0.0002 dir 0.0033 gain 0.0021 pat 0.3230 tau nan) val_sll -9.77 dB best -9.77 | 22.7s
+[a_amp] epoch  30 loss 0.0223 (sll 0.0002 dir 0.0036 gain 0.0022 pat 0.3247 tau 0.100) val_sll -9.77 dB best -9.77 | 23.1s
+[a_amp] early stop at epoch 30
+[a_amp] done: best val SLL -9.77 dB, 706 s

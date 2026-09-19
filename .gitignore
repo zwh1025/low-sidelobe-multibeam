@@ -1,0 +1,15 @@
+# python
+__pycache__/
+*.pyc
+
+# heavy training artifacts (checkpoints are reproducible from configs + logs)
+*.pt
+*.pth
+
+# papers & private documents (copyrighted PDF / personal manuscript)
+论文/
+~$*
+
+# os / editor
+Thumbs.db
+.DS_Store

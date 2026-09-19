@@ -1,0 +1,10 @@
+# Phase 2: pre-experiments E1-E4 (skeleton)
+array: {n: 64, d_over_lambda: 0.5, n_pad: 512}
+taylor: {sll_db: -25, nbar: 5}
+experiments: [E1, E2, E3, E4]
+beams:
+  theta_min_deg: 2
+  theta_max_deg: 45
+  min_sep_deg: 5
+  n_tasks: 20
+seed: 42

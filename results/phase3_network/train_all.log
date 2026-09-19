@@ -1,0 +1,49 @@
+device=cuda | runs=main,b_pat,a_amp | smoke=False
+[main] epoch   0 loss 0.1626 (sll 0.0005 dir 0.1199 gain 0.0917 pat 0.6287 tau nan) val_sll -4.04 dB best -4.04 | 26.9s
+[main] epoch  10 loss 0.0358 (sll 0.0003 dir 0.0257 gain 0.0183 pat 0.4117 tau nan) val_sll -8.48 dB best -8.48 | 21.8s
+[main] epoch  20 loss 0.0307 (sll 0.0003 dir 0.0195 gain 0.0130 pat 0.3835 tau nan) val_sll -9.79 dB best -9.81 | 21.7s
+[main] epoch  30 loss -24.4300 (sll -27.2153 dir 0.7252 gain 0.8546 pat 0.6492 tau 1.000) val_sll -18.32 dB best -18.32 | 22.6s
+[main] epoch  40 loss -29.1905 (sll -29.9472 dir 0.8808 gain 1.1112 pat 0.8256 tau 0.981) val_sll -22.16 dB best -22.21 | 22.4s
+[main] epoch  50 loss -30.2205 (sll -30.9555 dir 0.9212 gain 1.2026 pat 0.9414 tau 0.934) val_sll -23.89 dB best -23.95 | 22.2s
+[main] epoch  60 loss -30.4375 (sll -31.1181 dir 0.9397 gain 1.2458 pat 1.0010 tau 0.860) val_sll -24.36 dB best -24.38 | 22.2s
+[main] epoch  70 loss -30.2187 (sll -30.8043 dir 0.9423 gain 1.2520 pat 1.0111 tau 0.765) val_sll -24.35 dB best -24.64 | 22.7s
+[main] epoch  80 loss -29.9079 (sll -30.4120 dir 0.9489 gain 1.2661 pat 1.0425 tau 0.655) val_sll -24.52 dB best -24.92 | 22.4s
+[main] epoch  90 loss -29.3898 (sll -30.0310 dir 0.9548 gain 1.2768 pat 1.0504 tau 0.538) val_sll -25.01 dB best -25.08 | 22.3s
+[main] epoch 100 loss -28.7874 (sll -29.3750 dir 0.9579 gain 1.2867 pat 1.0524 tau 0.422) val_sll -25.34 dB best -25.42 | 22.3s
+[main] epoch 110 loss -28.1417 (sll -28.7864 dir 0.9689 gain 1.3030 pat 1.0574 tau 0.315) val_sll -25.64 dB best -25.64 | 22.3s
+[main] epoch 120 loss -27.5073 (sll -28.0782 dir 0.9696 gain 1.3067 pat 1.0569 tau 0.224) val_sll -25.80 dB best -25.80 | 22.3s
+[main] epoch 130 loss -26.9633 (sll -27.5965 dir 0.9669 gain 1.3042 pat 1.0560 tau 0.155) val_sll -25.88 dB best -25.89 | 22.3s
+[main] epoch 140 loss -26.6097 (sll -27.2852 dir 0.9719 gain 1.3057 pat 1.0525 tau 0.112) val_sll -25.96 dB best -25.96 | 22.3s
+[main] done: best val SLL -25.97 dB, 3345 s
+[b_pat] epoch   0 loss 0.1208 (sll 0.0012 dir 0.0500 gain 0.0358 pat 0.0000 tau nan) val_sll -1.95 dB best -1.95 | 20.7s
+[b_pat] epoch  10 loss 0.0160 (sll 0.0008 dir 0.0253 gain 0.0179 pat 0.0000 tau nan) val_sll -3.00 dB best -3.20 | 20.5s
+[b_pat] epoch  20 loss 0.0094 (sll 0.0007 dir 0.0192 gain 0.0125 pat 0.0000 tau nan) val_sll -1.89 dB best -3.20 | 20.6s
+[b_pat] epoch  30 loss -23.1120 (sll -26.3408 dir 0.7460 gain 0.8537 pat 0.0000 tau 1.000) val_sll -15.35 dB best -15.35 | 21.0s
+[b_pat] epoch  40 loss -29.4798 (sll -30.1287 dir 0.9345 gain 1.2296 pat 0.0000 tau 0.981) val_sll -22.63 dB best -22.63 | 20.9s
+[b_pat] epoch  50 loss -30.2080 (sll -30.8717 dir 0.9392 gain 1.2392 pat 0.0000 tau 0.934) val_sll -24.04 dB best -24.04 | 20.8s
+[b_pat] epoch  60 loss -30.2818 (sll -30.9187 dir 0.9428 gain 1.2520 pat 0.0000 tau 0.860) val_sll -24.37 dB best -24.49 | 20.7s
+[b_pat] epoch  70 loss -30.1591 (sll -30.7804 dir 0.9514 gain 1.2687 pat 0.0000 tau 0.765) val_sll -24.78 dB best -24.78 | 21.9s
+[b_pat] epoch  80 loss -29.8197 (sll -30.4217 dir 0.9522 gain 1.2732 pat 0.0000 tau 0.655) val_sll -24.93 dB best -24.93 | 21.1s
+[b_pat] epoch  90 loss -29.3531 (sll -29.8891 dir 0.9565 gain 1.2760 pat 0.0000 tau 0.538) val_sll -25.07 dB best -25.07 | 20.9s
+[b_pat] epoch 100 loss -28.7695 (sll -29.3380 dir 0.9599 gain 1.2851 pat 0.0000 tau 0.422) val_sll -25.39 dB best -25.49 | 21.0s
+[b_pat] epoch 110 loss -28.1456 (sll -28.6980 dir 0.9677 gain 1.2976 pat 0.0000 tau 0.315) val_sll -25.56 dB best -25.59 | 20.8s
+[b_pat] epoch 120 loss -27.5183 (sll -28.1250 dir 0.9681 gain 1.2966 pat 0.0000 tau 0.224) val_sll -25.81 dB best -25.82 | 20.8s
+[b_pat] epoch 130 loss -26.9821 (sll -27.4993 dir 0.9719 gain 1.3068 pat 0.0000 tau 0.155) val_sll -25.90 dB best -25.90 | 20.9s
+[b_pat] epoch 140 loss -26.6341 (sll -27.2570 dir 0.9765 gain 1.3104 pat 0.0000 tau 0.112) val_sll -25.96 dB best -25.96 | 20.8s
+[b_pat] done: best val SLL -25.97 dB, 3151 s
+[a_amp] epoch   0 loss 0.1500 (sll 0.0004 dir 0.0580 gain 0.0425 pat 0.5517 tau nan) val_sll -5.42 dB best -5.42 | 22.3s
+[a_amp] epoch  10 loss 0.0397 (sll 0.0003 dir 0.0232 gain 0.0166 pat 0.4334 tau nan) val_sll -7.81 dB best -8.30 | 21.9s
+[a_amp] epoch  20 loss 0.0324 (sll 0.0003 dir 0.0194 gain 0.0130 pat 0.3923 tau nan) val_sll -9.55 dB best -9.55 | 21.8s
+[a_amp] epoch  30 loss -24.0154 (sll -27.4955 dir 0.9136 gain 1.1731 pat 0.6869 tau 1.000) val_sll -18.57 dB best -18.57 | 22.0s
+[a_amp] epoch  40 loss -29.3080 (sll -29.9389 dir 0.8955 gain 1.1414 pat 0.8521 tau 0.981) val_sll -22.39 dB best -22.39 | 22.5s
+[a_amp] epoch  50 loss -29.7648 (sll -30.2049 dir 0.9217 gain 1.2003 pat 0.8776 tau 0.934) val_sll -23.13 dB best -23.36 | 22.0s
+[a_amp] epoch  60 loss -29.8142 (sll -30.4221 dir 0.9237 gain 1.2037 pat 0.9280 tau 0.860) val_sll -24.01 dB best -24.01 | 21.9s
+[a_amp] epoch  70 loss -29.6609 (sll -30.3257 dir 0.9356 gain 1.2346 pat 0.9515 tau 0.765) val_sll -24.38 dB best -24.43 | 21.9s
+[a_amp] epoch  80 loss -29.3545 (sll -29.9854 dir 0.9406 gain 1.2438 pat 0.9810 tau 0.655) val_sll -24.74 dB best -24.74 | 22.2s
+[a_amp] epoch  90 loss -28.9398 (sll -29.4990 dir 0.9420 gain 1.2456 pat 0.9854 tau 0.538) val_sll -24.91 dB best -25.02 | 22.2s
+[a_amp] epoch 100 loss -28.3963 (sll -29.0442 dir 0.9538 gain 1.2728 pat 1.0087 tau 0.422) val_sll -25.26 dB best -25.26 | 22.1s
+[a_amp] epoch 110 loss -27.7708 (sll -28.3320 dir 0.9581 gain 1.2836 pat 1.0011 tau 0.315) val_sll -25.25 dB best -25.32 | 22.0s
+[a_amp] epoch 120 loss -27.1785 (sll -27.7637 dir 0.9601 gain 1.2855 pat 1.0082 tau 0.224) val_sll -25.53 dB best -25.54 | 21.9s
+[a_amp] epoch 130 loss -26.6496 (sll -27.2558 dir 0.9644 gain 1.2941 pat 1.0113 tau 0.155) val_sll -25.64 dB best -25.65 | 22.0s
+[a_amp] epoch 140 loss -26.2894 (sll -26.8765 dir 0.9653 gain 1.2920 pat 1.0092 tau 0.112) val_sll -25.71 dB best -25.71 | 22.0s
+[a_amp] done: best val SLL -25.72 dB, 3306 s

@@ -1,0 +1,37 @@
+# Phase 3: dual-beam network minimal validation
+array: {n: 64, d_over_lambda: 0.5, n_pad: 512}
+taylor: {sll_db: -25, nbar: 5}
+data:
+  m: 2
+  n_train: 4000
+  n_val: 500
+  n_test: 500
+  theta_min_deg: 2
+  theta_max_deg: 45
+  min_sep_deg: 5
+  swap_augment: true
+  with_amp_channel: true
+loss:
+  alpha: 1.0
+  beta: 1.0
+  gamma: 1.0
+  gamma2: 1.0
+  delta: 0.05
+  use_pat: true
+  sll_domain: power       # "power"(v4-v6, 自限但v6未降) | "dB"(v1-v3, 下降快但易退化) — 路线②用 dB
+  tau_start: 0.01         # power 域: 0.01→0.002 ; dB 域(路线②): 1.0→0.1
+  tau_end: 0.002
+  l_beam_mode: square     # "square" | "hinge"(路线②: 配 beam_floor 与更大 gamma2)
+  beam_floor: 0.7
+  stage1_frac: 0.0        # >0 启用两阶段课程(路线①): 该比例 epoch 内关闭 SLL 项先成束
+  warmup_frac: 0.0
+  r_train: 0.040
+train:
+  batch: 32
+  epochs: 150
+  lr: 0.001
+  weight_decay: 0.0001
+  patience: 40
+  clip: 1.0
+  width: 1.0
+seed: 42

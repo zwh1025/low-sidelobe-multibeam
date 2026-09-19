@@ -1,0 +1,20 @@
+# Phase 1: physics kernels + superposition baselines (skeleton; finalized at phase-1 start)
+array: {n: 64, d_over_lambda: 0.5, n_pad: 512}
+taylor: {sll_db: -25, nbar: 5}
+mask:
+  r_mask_taylor: 0.05
+  r_mask_uniform: 0.036   # phase-1 metrics.py will revisit: first-null-based adaptive mask
+beams:
+  theta_min_deg: 2
+  theta_max_deg: 45
+  min_sep_deg: 5
+  n_tasks_per_m: 20
+  m_list: [2, 4, 8, 16, 32]
+geometry:
+  repro_mode: point_feed   # geometry B, for Du reproduction
+  main_mode: plane         # geometry A, for phase 2/3 main experiments
+  f_over_D: 0.8
+du_case:                   # Du 2025 Fig.1 dual-beam case
+  beam1: [10, 45]
+  beam2: [15, 180]
+seed: 42
