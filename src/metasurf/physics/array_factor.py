@@ -31,13 +31,23 @@ def aperture_to_pattern_np(a, n_pad=512):
     return np.conj(np.fft.fftshift(np.fft.fft2(np.conj(a_pad), axes=(-2, -1)), axes=(-2, -1)))
 
 
+def _fftshift_torch(x):
+    # cat/slice implementation: identical to torch.fft.fftshift for even sizes,
+    # and avoids NPU (torch_npu) autograd bugs in fftshift/roll backward.
+    h = x.shape[-2] // 2
+    w = x.shape[-1] // 2
+    x = torch.cat([x[..., h:, :], x[..., :h, :]], dim=-2)
+    return torch.cat([x[..., :, w:], x[..., :, :w]], dim=-1)
+
+
 def aperture_to_pattern_torch(a, n_pad=512):
     """Torch version of aperture_to_pattern_np; supports batched (B, n, n) complex input."""
     n = a.shape[-1]
     p = _pad_amount(n, n_pad)
     a_pad = _pad_torch(a, p)
-    F = torch.fft.fftshift(torch.fft.fft2(torch.conj(a_pad)), dim=(-2, -1))
-    return torch.conj(F).resolve_conj()
+    a_conj = torch.complex(a_pad.real, -a_pad.imag)
+    F = _fftshift_torch(torch.fft.fft2(a_conj))
+    return torch.complex(F.real, -F.imag)
 
 
 def pattern_from_phase_np(phase, amp=None, n_pad=512):

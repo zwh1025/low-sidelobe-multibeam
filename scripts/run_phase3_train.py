@@ -17,6 +17,18 @@ import yaml
 
 from metasurf.train.trainer import train_run
 
+
+def pick_device():
+    if torch.cuda.is_available():
+        return "cuda"
+    try:
+        import torch_npu  # noqa: F401
+        if torch.npu.is_available():
+            return "npu"
+    except ImportError:
+        pass
+    return "cpu"
+
 CFG_PATH = ROOT / "configs" / "phase3.yaml"
 OUT_ROOT = ROOT / "results" / "phase3_network"
 
@@ -55,10 +67,11 @@ def main():
                    warmup_frac=0.3)
         args.runs = "main,b_pat,a_amp"
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    device = pick_device()
     print("device={} | runs={} | smoke={}".format(device, args.runs, args.smoke),
           flush=True)
-    torch.backends.cudnn.benchmark = True
+    if device == "cuda":
+        torch.backends.cudnn.benchmark = True
 
     for name in args.runs.split(","):
         run_cfg = dict(cfg)
