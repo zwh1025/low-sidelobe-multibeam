@@ -15,15 +15,15 @@ loss:
   alpha: 1.0
   beta: 1.0
   gamma: 1.0
-  gamma2: 1.0
+  gamma2: 50.0
   delta: 0.05
   use_pat: true
-  sll_domain: power       # "power"(v4-v6, 自限但v6未降) | "dB"(v1-v3, 下降快但易退化) — 路线②用 dB
-  tau_start: 0.01         # power 域: 0.01→0.002 ; dB 域(路线②): 1.0→0.1
-  tau_end: 0.002
-  l_beam_mode: square     # "square" | "hinge"(路线②: 配 beam_floor 与更大 gamma2)
-  beam_floor: 0.7
-  stage1_frac: 0.0        # >0 启用两阶段课程(路线①): 该比例 epoch 内关闭 SLL 项先成束
+  sll_domain: dB          # 路线②: dB 域 LSE（下降快），配铰链束下限防退化
+  tau_start: 1.0          # dB 域退火 1.0 -> 0.1
+  tau_end: 0.1
+  l_beam_mode: hinge      # 路线②: 铰链式硬束下限
+  beam_floor: 0.95        # 路线②再收紧: 20log10(1/0.95)=0.446 dB, 目标 cons<=1
+  stage1_frac: 0.0
   warmup_frac: 0.0
   r_train: 0.040
 train:

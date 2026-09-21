@@ -11,7 +11,7 @@
 | 0 | 工程脚手架 + 物理内核 | ✅ 完成 | Taylor 理想幅相 SLL −25.02 dB（设计值命中）；numpy/torch 一致性 1.2e-7 |
 | 1 | 三连检 + 叠加法基线 + Du 2025 复现 | ✅ 完成 | 基线 arg-sum SLL −9.7 dB；Du 对标全部量级一致；两项新发现（基线②≡①、式(6)几何依赖性） |
 | 2 | 预实验（物理边界） | ✅ 完成 | 幅度锥削贡献 11.6 dB；解析-理想差距 14.4 dB（情况 A） |
-| 3 | 双波束网络最小验证 | ⚠️ 执行完毕、优化未闭环 | SLL 强信号已证（−25~−26 dB，+15~16 dB）但伴随弱束退化；"平衡+低副瓣"联合优化为核心难点，路线待决策（§14.4(5)） |
+| 3 | 双波束网络最小验证 | ✅ **闭环（检查点 3 达成）** | v9（dB-LSE+铰链 floor 0.95）：SLL −22.42 dB（**+12.72 dB** vs 基线，双束平衡 0.62/1.03 dB 前提下）+ 指向 0.111° + 推理批16 0.35 ms/样本——**强信号成立**；v7/v8/v9 为 Pareto 前沿（§14.4(7)） |
 
 ## 目录结构
 
@@ -48,4 +48,4 @@ pip install -r requirements.txt   # torch 需带 CUDA
 | 3 训练 | `python scripts/run_phase3_train.py --runs main,b_pat,a_amp` | results/phase3_network/<run>/（ckpt + history.json） |
 | 3 评测 | `python scripts/run_phase3_eval.py` | metrics_test.csv + 3 图 + 方向一验证报告.md |
 
-本地参考环境：`D:\ProgramFiles\Anaconda\envs\antenna_ai\python.exe`（Python 3.10 / torch 2.5.1+cu121 / RTX 3050 8GB；单 run 约 50 min）。**服务器训练前必读 [`交接文档.md`](交接文档.md)**——含路线决策、配置开关与验收判据。
+本地参考环境：`D:\ProgramFiles\Anaconda\envs\antenna_ai\python.exe`（Python 3.10 / torch 2.5.1+cu121 / RTX 3050 8GB；单 run 约 50 min）。服务器环境（2026-09-19 起）：昇腾 910B3（torch 2.7.1+cpu / torch_npu 2.7.1.post4，device 自动选择 cuda→npu→cpu；单 run 150 epoch ≈ 5 h；`array_factor.py` 已含 NPU fftshift/conj 兼容修复）。**服务器训练前必读 [`交接文档.md`](交接文档.md)**——含路线决策、配置开关与验收判据。

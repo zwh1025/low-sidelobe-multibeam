@@ -1,0 +1,37 @@
+/opt/buildtools/python-3.12.9/lib/python3.12/site-packages/torch_npu/utils/_path_manager.py:66: UserWarning: Permission mismatch: The owner of /opt/buildtools/python-3.12.9/lib/python3.12/site-packages/torch_npu/lib/libop_plugin_atb.so does not match.
+  warnings.warn(f"Permission mismatch: The owner of {path} does not match.")
+device=npu | runs=b_pat,a_amp | smoke=False
+/mnt/workspace/gitCode/cann/low-sidelobe-multibeam/src/metasurf/train/losses.py:83: UserWarning: Cannot create tensor with interal format while allow_internel_format=False, tensor will be created with base format. (Triggered internally at ../torch_npu/csrc/aten/common/TensorFactories.cpp:340.)
+  x = torch.where(sl, x, torch.full_like(x, -1e9))
+[b_pat] epoch   0 loss -20.0210 (sll -21.5818 dir 0.0398 gain 0.0279 pat 0.0000 beam 0.0003 tau 0.9999) val_sll -12.87 dB best -12.87 rs 0.358 | 113.7s
+[b_pat] epoch  10 loss -26.4030 (sll -26.6268 dir 0.0722 gain 0.0530 pat 0.0000 beam 0.0010 tau 0.9881) val_sll -19.39 dB best -19.39 rs 0.680 | 111.9s
+[b_pat] epoch  20 loss -26.6678 (sll -26.6289 dir 0.0749 gain 0.0546 pat 0.0000 beam 0.0011 tau 0.9572) val_sll -19.22 dB best -19.48 rs 0.809 | 112.0s
+[b_pat] epoch  30 loss -26.9047 (sll -27.0167 dir 0.0781 gain 0.0576 pat 0.0000 beam 0.0015 tau 0.9085) val_sll -19.39 dB best -19.91 rs 0.876 | 111.9s
+[b_pat] epoch  40 loss -26.9652 (sll -27.3398 dir 0.0795 gain 0.0585 pat 0.0000 beam 0.0014 tau 0.8441) val_sll -20.25 dB best -20.31 rs 0.934 | 111.9s
+[b_pat] epoch  50 loss -27.4170 (sll -27.6543 dir 0.0734 gain 0.0535 pat 0.0000 beam 0.0010 tau 0.7669) val_sll -20.88 dB best -21.01 rs 0.940 | 111.9s
+[b_pat] epoch  60 loss -27.2458 (sll -27.3255 dir 0.0722 gain 0.0526 pat 0.0000 beam 0.0009 tau 0.6801) val_sll -20.61 dB best -21.50 rs 0.942 | 111.9s
+[b_pat] epoch  70 loss -26.6678 (sll -26.8267 dir 0.0795 gain 0.0584 pat 0.0000 beam 0.0011 tau 0.5877) val_sll -21.69 dB best -21.69 rs 0.961 | 112.0s
+[b_pat] epoch  80 loss -25.9719 (sll -26.3295 dir 0.0752 gain 0.0550 pat 0.0000 beam 0.0009 tau 0.4937) val_sll -21.50 dB best -21.69 rs 0.962 | 111.9s
+[b_pat] epoch  90 loss -25.5275 (sll -25.5476 dir 0.0729 gain 0.0533 pat 0.0000 beam 0.0008 tau 0.4021) val_sll -21.68 dB best -21.81 rs 0.964 | 111.9s
+[b_pat] epoch 100 loss -24.9924 (sll -25.0974 dir 0.0692 gain 0.0504 pat 0.0000 beam 0.0006 tau 0.3170) val_sll -21.97 dB best -21.98 rs 0.966 | 111.6s
+[b_pat] epoch 110 loss -24.3668 (sll -24.6285 dir 0.0736 gain 0.0538 pat 0.0000 beam 0.0007 tau 0.2420) val_sll -22.03 dB best -22.03 rs 0.968 | 112.0s
+[b_pat] epoch 120 loss -23.8681 (sll -24.2302 dir 0.0737 gain 0.0539 pat 0.0000 beam 0.0008 tau 0.1805) val_sll -22.00 dB best -22.10 rs 0.975 | 112.0s
+[b_pat] epoch 130 loss -23.4747 (sll -23.6316 dir 0.0721 gain 0.0521 pat 0.0000 beam 0.0006 tau 0.1352) val_sll -22.11 dB best -22.18 rs 0.976 | 112.2s
+[b_pat] epoch 140 loss -23.2849 (sll -23.4554 dir 0.0719 gain 0.0525 pat 0.0000 beam 0.0006 tau 0.1080) val_sll -22.23 dB best -22.25 rs 0.976 | 111.9s
+[b_pat] done: best val SLL -22.26 dB, 16803 s
+[a_amp] epoch   0 loss -19.6130 (sll -20.9513 dir 0.0597 gain 0.0433 pat 0.4130 beam 0.0008 tau 0.9999) val_sll -12.35 dB best -12.35 rs 0.317 | 121.3s
+[a_amp] epoch  10 loss -25.9939 (sll -26.2344 dir 0.0637 gain 0.0463 pat 1.0020 beam 0.0007 tau 0.9881) val_sll -18.49 dB best -18.49 rs 0.623 | 121.4s
+[a_amp] epoch  20 loss -26.7795 (sll -26.8598 dir 0.0411 gain 0.0294 pat 1.2953 beam 0.0003 tau 0.9572) val_sll -19.18 dB best -19.18 rs 0.733 | 121.3s
+[a_amp] epoch  30 loss -26.9432 (sll -27.3208 dir 0.0472 gain 0.0345 pat 1.5358 beam 0.0008 tau 0.9085) val_sll -19.84 dB best -19.84 rs 0.809 | 121.3s
+[a_amp] epoch  40 loss -26.8432 (sll -27.0579 dir 0.0540 gain 0.0390 pat 1.5726 beam 0.0007 tau 0.8441) val_sll -20.08 dB best -20.08 rs 0.898 | 121.4s
+[a_amp] epoch  50 loss -26.6907 (sll -27.1590 dir 0.0805 gain 0.0594 pat 1.6660 beam 0.0019 tau 0.7669) val_sll -20.43 dB best -20.43 rs 0.993 | 121.4s
+[a_amp] epoch  60 loss -26.3505 (sll -26.4507 dir 0.0679 gain 0.0497 pat 1.6362 beam 0.0010 tau 0.6801) val_sll -20.51 dB best -20.65 rs 1.077 | 121.2s
+[a_amp] epoch  70 loss -25.9220 (sll -25.7941 dir 0.0857 gain 0.0634 pat 1.4862 beam 0.0022 tau 0.5877) val_sll -20.75 dB best -20.82 rs 1.153 | 121.2s
+[a_amp] epoch  80 loss -25.3852 (sll -25.6747 dir 0.0726 gain 0.0532 pat 1.7611 beam 0.0014 tau 0.4937) val_sll -20.93 dB best -20.93 rs 1.212 | 121.3s
+[a_amp] epoch  90 loss -24.8187 (sll -25.0220 dir 0.0700 gain 0.0514 pat 1.7335 beam 0.0010 tau 0.4021) val_sll -21.01 dB best -21.06 rs 1.259 | 121.2s
+[a_amp] epoch 100 loss -24.2495 (sll -24.2785 dir 0.0858 gain 0.0633 pat 1.6899 beam 0.0020 tau 0.3170) val_sll -21.12 dB best -21.14 rs 1.294 | 121.1s
+[a_amp] epoch 110 loss -23.7048 (sll -24.0258 dir 0.0720 gain 0.0529 pat 1.6555 beam 0.0009 tau 0.2420) val_sll -21.21 dB best -21.23 rs 1.316 | 121.3s
+[a_amp] epoch 120 loss -23.2332 (sll -23.5935 dir 0.0845 gain 0.0623 pat 1.6737 beam 0.0014 tau 0.1805) val_sll -21.31 dB best -21.31 rs 1.331 | 121.3s
+[a_amp] epoch 130 loss -22.9133 (sll -23.4326 dir 0.0780 gain 0.0570 pat 1.6844 beam 0.0009 tau 0.1352) val_sll -21.34 dB best -21.34 rs 1.338 | 121.3s
+[a_amp] epoch 140 loss -22.6656 (sll -22.6835 dir 0.0711 gain 0.0521 pat 1.6596 beam 0.0007 tau 0.1080) val_sll -21.33 dB best -21.35 rs 1.341 | 121.1s
+[a_amp] done: best val SLL -21.35 dB, 18192 s
