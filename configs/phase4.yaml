@@ -1,0 +1,49 @@
+# Phase 4: learned complex superposition (LCS), multi-M training & evaluation
+array: {n: 64, d_over_lambda: 0.5, n_pad: 512}
+taylor: {sll_db: -25, nbar: 5}
+data:
+  m_list: [1, 2, 3, 4, 5, 6, 7, 8]   # R2 default (R1 overrides via --mtrain 2)
+  m_max: 8
+  n_train: 6000
+  n_val: 1600
+  theta_min_deg: 2
+  theta_max_deg: 45
+  min_sep_deg: 5
+  with_amp_channel: true
+model:
+  variant: D          # "S" strict | "D" decoder fallback (R1a uses S)
+  c_enc: 64
+  width: 1.0
+  dec_norm: gn        # R2d: decoder GroupNorm (BN running stats break under mixed-M bucketing; "bn" = phase3 compat)
+loss:                  # inherits v9 (route-2 closed-loop config)
+  alpha: 1.0
+  beta: 1.0
+  gamma: 1.0
+  gamma2: 50.0
+  gamma2_mode: fixed   # "fixed" | "dual" (Lagrangian ascent, R5 ablation)
+  dual_eta: 50.0
+  delta: 0.05
+  use_pat: true
+  sll_domain: dB
+  tau_start: 1.0
+  tau_end: 0.1
+  l_beam_mode: hinge
+  beam_floor: 0.95
+  stage1_frac: 0.0
+  warmup_frac: 0.0
+  r_train: 0.040
+  dir2: 30.0           # R2b: pointing hinge weight (0 = off, phase3-compatible)
+  dir_floor: 0.05      # per-beam tolerance: 1 - F_norm@target <= 0.05
+  sll_floor_db: -35.0  # R2b: clamp dB map before LSE (null = off)
+train:
+  batch: 32
+  epochs: 150
+  lr: 0.001
+  weight_decay: 0.0001
+  patience: 60         # R2d: 40->60 (R2b early stop at e92 cut the tau annealing tail)
+  clip: 1.0
+eval:
+  m_test: [2, 4, 8, 16, 32]
+  n_test: 200          # tasks per M (M=2 always 500 for v1-v9 comparability)
+  test_seed: 819
+seed: 42

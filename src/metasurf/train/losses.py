@@ -24,7 +24,8 @@ class PhysicsLoss(nn.Module):
                  alpha=1.0, beta=0.5, gamma=0.1, delta=0.05, use_pat=True,
                  gamma2=1.0, sll_domain="power", tau_start=0.01, tau_end=0.002,
                  l_beam_mode="square", beam_floor=0.7, stage1_frac=0.0,
-                 warmup_frac=0.0, window2d=None):
+                 warmup_frac=0.0, window2d=None,
+                 dir2=0.0, dir_floor=0.05, sll_floor_db=None, feed_phase=None):
         super().__init__()
         self.n, self.n_pad = n, n_pad
         self.r2 = r_train ** 2
@@ -36,6 +37,13 @@ class PhysicsLoss(nn.Module):
         self.l_beam_mode = l_beam_mode
         self.beam_floor = beam_floor
         self.stage1_frac = stage1_frac
+        self.dir2, self.dir_floor = dir2, dir_floor
+        self.sll_floor_db = sll_floor_db
+        if feed_phase is not None:
+            self.register_buffer("feed_phase",
+                                 torch.from_numpy(feed_phase.astype(np.float32)))
+        else:
+            self.feed_phase = None
         u_axis = fft_uv_axes(n_pad, d_ol)
         U, V = np.meshgrid(u_axis, u_axis, indexing="ij")
         self.register_buffer("U", torch.from_numpy(U.astype(np.float32)))
@@ -78,6 +86,8 @@ class PhysicsLoss(nn.Module):
                 * (1.0 + math.cos(math.pi * min(1.0, prog)))
             if self.sll_domain == "dB":
                 x = 20.0 * torch.log10(F_norm + 1e-12)
+                if self.sll_floor_db is not None:
+                    x = torch.clamp(x, min=float(self.sll_floor_db))
             else:
                 x = p
             x = torch.where(sl, x, torch.full_like(x, -1e9))
@@ -96,9 +106,17 @@ class PhysicsLoss(nn.Module):
             v0 = tgt_uv[:, i, 1].view(-1, 1, 1)
             disk = ((self.U[None] - u0) ** 2 + (self.V[None] - v0) ** 2) <= self.r2
             G.append((F_abs * disk).amax(dim=(-2, -1)))
-        l_dir = torch.stack(dir_terms, dim=1).sum(dim=1).mean()
+        d_beam = torch.stack(dir_terms, dim=1)
+        l_dir = d_beam.sum(dim=1).mean()
+        if self.dir2 > 0:
+            l_dirh = (torch.clamp(d_beam - self.dir_floor, min=0.0) ** 2).mean()
+        else:
+            l_dirh = None
         G = torch.stack(G, dim=1)
-        l_gain = (G.std(dim=1) / G.mean(dim=1).clamp(min=1e-12)).mean()
+        if G.shape[1] > 1:
+            l_gain = (G.std(dim=1) / G.mean(dim=1).clamp(min=1e-12)).mean()
+        else:
+            l_gain = torch.zeros((), device=G.device)
         G_hat = G / G.amax(dim=1, keepdim=True).clamp(min=1e-12)
         if self.l_beam_mode == "hinge":
             l_beam = (torch.clamp(self.beam_floor - G_hat.amin(dim=1),
@@ -107,16 +125,20 @@ class PhysicsLoss(nn.Module):
             l_beam = ((1.0 - G_hat.amin(dim=1)) ** 2).mean()
 
         total = self.beta * l_dir + self.gamma * l_gain + self.gamma2 * l_beam
+        if self.dir2 > 0:
+            total = total + self.dir2 * l_dirh
         if epoch_frac >= self.stage1_frac:
             total = total + self.alpha * l_sll
         parts = dict(l_sll=float(l_sll), l_dir=float(l_dir), l_gain=float(l_gain),
-                     tau=float(tau), l_pat=0.0, l_beam=float(l_beam))
+                     tau=float(tau), l_pat=0.0, l_beam=float(l_beam),
+                     l_dirh=0.0 if l_dirh is None else float(l_dirh))
         if self.use_pat and self.delta > 0:
-            with_amp = X.shape[1] == 6
+            n_beams = tgt_uv.shape[1]
+            with_amp = X.shape[1] == 3 * n_beams
             step = 3 if with_amp else 2
             acc = torch.zeros(X.shape[0], self.n, self.n, dtype=torch.complex64,
                               device=X.device)
-            for i in range(2):
+            for i in range(n_beams):
                 base = i * step
                 A = X[:, base + 2] if with_amp else self.window2d[None]
                 acc = acc + A * torch.complex(X[:, base], X[:, base + 1])
@@ -128,4 +150,6 @@ class PhysicsLoss(nn.Module):
         return total, parts
 
     def _pattern(self, ap):
+        if self.feed_phase is not None:
+            ap = ap * torch.exp(1j * self.feed_phase)
         return aperture_to_pattern_torch(ap, self.n_pad)

@@ -4,28 +4,34 @@ import torch
 import torch.nn as nn
 
 
+def _make_norm(ch, norm):
+    if norm == "gn":
+        return nn.GroupNorm(32, ch)
+    return nn.BatchNorm2d(ch)
+
+
 class DoubleConv(nn.Sequential):
-    def __init__(self, c_in, c_out):
+    def __init__(self, c_in, c_out, norm="bn"):
         super().__init__(
             nn.Conv2d(c_in, c_out, 3, padding=1, bias=False),
-            nn.BatchNorm2d(c_out),
+            _make_norm(c_out, norm),
             nn.LeakyReLU(0.1, inplace=True),
             nn.Conv2d(c_out, c_out, 3, padding=1, bias=False),
-            nn.BatchNorm2d(c_out),
+            _make_norm(c_out, norm),
             nn.LeakyReLU(0.1, inplace=True),
         )
 
 
 class Down(nn.Sequential):
-    def __init__(self, c_in, c_out):
-        super().__init__(nn.MaxPool2d(2), DoubleConv(c_in, c_out))
+    def __init__(self, c_in, c_out, norm="bn"):
+        super().__init__(nn.MaxPool2d(2), DoubleConv(c_in, c_out, norm))
 
 
 class Up(nn.Module):
-    def __init__(self, c_in, c_out):
+    def __init__(self, c_in, c_out, norm="bn"):
         super().__init__()
         self.up = nn.Upsample(scale_factor=2, mode="bilinear", align_corners=False)
-        self.conv = DoubleConv(c_in, c_out)
+        self.conv = DoubleConv(c_in, c_out, norm)
 
     def forward(self, x, skip):
         x = self.up(x)
@@ -34,18 +40,23 @@ class Up(nn.Module):
 
 
 class UNet(nn.Module):
-    """in_ch -> out_ch at 64x64; width scales the channel budget (~7.7M params at width 1)."""
+    """in_ch -> out_ch at 64x64; width scales the channel budget (~7.7M params at width 1).
 
-    def __init__(self, in_ch=6, out_ch=2, width=1.0):
+    norm="bn" (default, phase-3 behavior) or "gn" (GroupNorm: per-sample
+    normalization, batch-composition/M-agnostic, train==eval — use when input
+    statistics vary across task buckets, e.g. mixed-M decoder inputs).
+    """
+
+    def __init__(self, in_ch=6, out_ch=2, width=1.0, norm="bn"):
         super().__init__()
         f = [max(8, int(round(c * width))) for c in (64, 128, 256, 512)]
-        self.inc = DoubleConv(in_ch, f[0])
-        self.down1 = Down(f[0], f[1])
-        self.down2 = Down(f[1], f[2])
-        self.down3 = Down(f[2], f[3])
-        self.up1 = Up(f[3] + f[2], f[2])
-        self.up2 = Up(f[2] + f[1], f[1])
-        self.up3 = Up(f[1] + f[0], f[0])
+        self.inc = DoubleConv(in_ch, f[0], norm)
+        self.down1 = Down(f[0], f[1], norm)
+        self.down2 = Down(f[1], f[2], norm)
+        self.down3 = Down(f[2], f[3], norm)
+        self.up1 = Up(f[3] + f[2], f[2], norm)
+        self.up2 = Up(f[2] + f[1], f[1], norm)
+        self.up3 = Up(f[1] + f[0], f[0], norm)
         self.drop = nn.Dropout2d(0.1)
         self.outc = nn.Conv2d(f[0], out_ch, 1)
 
