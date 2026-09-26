@@ -1,0 +1,16 @@
+/opt/buildtools/python-3.12.9/lib/python3.12/site-packages/torch_npu/utils/_path_manager.py:66: UserWarning: Permission mismatch: The owner of /opt/buildtools/python-3.12.9/lib/python3.12/site-packages/torch_npu/lib/libop_plugin_atb.so does not match.
+  warnings.warn(f"Permission mismatch: The owner of {path} does not match.")
+[M= 2] IFT SLL -7.99+/-1.56 | cons 1.16/1.56 | perr_max 1.366 | 5.19 s/task
+[M= 8] IFT SLL -9.97+/-0.95 | cons 1.24/1.50 | perr_max 1.725 | 9.21 s/task
+[M=16] IFT SLL -8.69+/-0.73 | cons 1.29/1.51 | perr_max 1.691 | 14.71 s/task
+[M=32] IFT SLL -7.39+/-0.61 | cons 1.30/1.52 | perr_max 2.123 | 26.36 s/task
+saved -> /mnt/workspace/gitCode/cann/low-sidelobe-multibeam/results/phase4_network/ift_baseline/metrics_ift.csv
+/opt/buildtools/python-3.12.9/lib/python3.12/site-packages/torch_npu/utils/_path_manager.py:66: UserWarning: Permission mismatch: The owner of /opt/buildtools/python-3.12.9/lib/python3.12/site-packages/torch_npu/lib/libop_plugin_atb.so does not match.
+  warnings.warn(f"Permission mismatch: The owner of {path} does not match.")
+/mnt/workspace/gitCode/cann/low-sidelobe-multibeam/src/metasurf/train/losses.py:93: UserWarning: Cannot create tensor with interal format while allow_internel_format=False, tensor will be created with base format. (Triggered internally at ../torch_npu/csrc/aten/common/TensorFactories.cpp:340.)
+  x = torch.where(sl, x, torch.full_like(x, -1e9))
+[M= 2] direct-opt SLL -24.03+/-1.05 | cons 0.45/0.81 | perr_max 0.182 | 10.67 s/task
+[M= 8] direct-opt SLL -19.56+/-2.15 | cons 0.55/0.82 | perr_max 0.404 | 30.99 s/task
+[M=16] direct-opt SLL -16.05+/-1.30 | cons 0.63/1.39 | perr_max 0.597 | 58.22 s/task
+[M=32] direct-opt SLL -15.15+/-0.42 | cons 0.97/1.13 | perr_max 0.485 | 112.49 s/task
+saved -> /mnt/workspace/gitCode/cann/low-sidelobe-multibeam/results/phase4_network/ift_baseline/metrics_directopt.csv

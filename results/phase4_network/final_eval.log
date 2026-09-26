@@ -1,0 +1,32 @@
+/opt/buildtools/python-3.12.9/lib/python3.12/site-packages/torch_npu/utils/_path_manager.py:66: UserWarning: Permission mismatch: The owner of /opt/buildtools/python-3.12.9/lib/python3.12/site-packages/torch_npu/lib/libop_plugin_atb.so does not match.
+  warnings.warn(f"Permission mismatch: The owner of {path} does not match.")
+Warning: The current version of the file storing weights is old, and it is relanded due to internal bug of torch and compatibility issue. We will deprecate the loading support for this type of file in the future, please use newer torch to re-store the weight file.
+bnstats: loaded per-M stats (ckpt ckpt_best.pt)
+run=r2e ckpt_best.pt epoch=86 val_sll=-20.13 variant=D device=npu
+[M= 2] net     SLL -21.88 +/- 1.02 dB
+[M= 2] ideal   SLL -24.14 +/- 1.12 dB
+[M= 2] argsum  SLL -9.70 +/- 0.79 dB
+[M= 2] onebit  SLL -9.52 +/- 0.79 dB
+[M= 4] net     SLL -19.89 +/- 0.80 dB
+[M= 4] ideal   SLL -22.48 +/- 1.51 dB
+[M= 4] argsum  SLL -12.21 +/- 0.96 dB
+[M= 4] onebit  SLL -11.24 +/- 0.81 dB
+[M= 8] net     SLL -17.58 +/- 0.87 dB
+[M= 8] ideal   SLL -20.31 +/- 1.24 dB
+[M= 8] argsum  SLL -10.90 +/- 1.01 dB
+[M= 8] onebit  SLL -9.97 +/- 0.81 dB
+[M=16] net     SLL -14.51 +/- 1.05 dB
+[M=16] ideal   SLL -18.74 +/- 0.95 dB
+[M=16] argsum  SLL -9.72 +/- 0.96 dB
+[M=16] onebit  SLL -8.67 +/- 0.80 dB
+[M=32] net     SLL -11.96 +/- 1.65 dB
+[M=32] ideal   SLL -17.21 +/- 0.92 dB
+[M=32] argsum  SLL -8.41 +/- 0.86 dB
+[M=32] onebit  SLL -7.12 +/- 0.71 dB
+[M= 2] perm |dSLL| mean 0.000 max 0.000 dB | rel-L2 0.00e+00
+[M= 4] perm |dSLL| mean 0.000 max 0.000 dB | rel-L2 0.00e+00
+[M= 8] perm |dSLL| mean 0.000 max 0.000 dB | rel-L2 0.00e+00
+[M=16] perm |dSLL| mean 0.000 max 0.000 dB | rel-L2 0.00e+00
+[M=32] perm |dSLL| mean 0.000 max 0.000 dB | rel-L2 0.00e+00
+[latency] NPU single 7.63 ms / batch16 0.49 ms/sample
+eval done -> /mnt/workspace/gitCode/cann/low-sidelobe-multibeam/results/phase4_network

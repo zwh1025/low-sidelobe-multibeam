@@ -1,0 +1,17 @@
+/opt/buildtools/python-3.12.9/lib/python3.12/site-packages/torch_npu/utils/_path_manager.py:66: UserWarning: Permission mismatch: The owner of /opt/buildtools/python-3.12.9/lib/python3.12/site-packages/torch_npu/lib/libop_plugin_atb.so does not match.
+  warnings.warn(f"Permission mismatch: The owner of {path} does not match.")
+device=npu | run=r4a_1bit variant=D m_list=[1, 2, 3, 4, 5, 6, 7, 8] n_train=6000 smoke=False
+Warning: The current version of the file storing weights is old, and it is relanded due to internal bug of torch and compatibility issue. We will deprecate the loading support for this type of file in the future, please use newer torch to re-store the weight file.
+[r4a_1bit] warm start from /mnt/workspace/gitCode/cann/low-sidelobe-multibeam/results/phase4_network/r2e/ckpt_best.pt
+/mnt/workspace/gitCode/cann/low-sidelobe-multibeam/src/metasurf/model/lcs.py:122: UserWarning: Cannot create tensor with interal format while allow_internel_format=False, tensor will be created with base format. (Triggered internally at ../torch_npu/csrc/aten/common/TensorFactories.cpp:340.)
+  torch.ones_like(ap.real),
+[r4a_1bit] epoch   0 loss -16.8907 (sll -17.5618 dir 0.2578 dirh 0.0013 gain 0.0370 pat 2.5933 beam 0.0042 tau 0.5000) val_sll -12.67 dB best -12.67 g2 50.0 | 335.9s
+[r4a_1bit] epoch  10 loss -16.9743 (sll -17.6934 dir 0.2723 dirh 0.0015 gain 0.0394 pat 2.4699 beam 0.0048 tau 0.4892) val_sll -12.93 dB best -13.09 g2 50.0 | 335.2s
+[r4a_1bit] epoch  20 loss -16.4236 (sll -17.1502 dir 0.2732 dirh 0.0016 gain 0.0408 pat 2.3321 beam 0.0050 tau 0.4599) val_sll -12.45 dB best -13.09 g2 50.0 | 334.9s
+[r4a_1bit] epoch  30 loss -15.2298 (sll -15.8664 dir 0.2552 dirh 0.0013 gain 0.0379 pat 1.8958 beam 0.0042 tau 0.4150) val_sll -11.12 dB best -13.09 g2 50.0 | 334.4s
+[r4a_1bit] epoch  40 loss -15.0357 (sll -15.7448 dir 0.2748 dirh 0.0016 gain 0.0417 pat 2.0161 beam 0.0049 tau 0.3588) val_sll -11.36 dB best -13.09 g2 50.0 | 334.1s
+[r4a_1bit] epoch  50 loss -14.7126 (sll -15.4154 dir 0.2713 dirh 0.0016 gain 0.0413 pat 2.1407 beam 0.0047 tau 0.2968) val_sll -12.46 dB best -13.09 g2 50.0 | 334.0s
+[r4a_1bit] epoch  60 loss -14.0006 (sll -14.7052 dir 0.2717 dirh 0.0016 gain 0.0410 pat 2.0920 beam 0.0048 tau 0.2352) val_sll -12.49 dB best -13.09 g2 50.0 | 333.9s
+[r4a_1bit] epoch  63 loss -14.0031 (sll -14.7364 dir 0.2778 dirh 0.0017 gain 0.0420 pat 2.1929 beam 0.0051 tau 0.2177) val_sll -12.53 dB best -13.09 g2 50.0 | 334.1s
+[r4a_1bit] early stop at epoch 63
+[r4a_1bit] done: best val SLL -13.09 dB, 21427 s
